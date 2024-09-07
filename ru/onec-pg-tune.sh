@@ -60,13 +60,13 @@ function message_before_start {
     echo
     echo "IP: $show_ip"
     echo
-    echo "Script: $script_name"
+    echo "Скрипт: $script_name"
     echo
-    echo "Log: $logfile_path"
+    echo "Лог: $logfile_path"
     echo
 
     # Wait until the user presses enter
-    read -p "Press Enter to start: "
+    read -p "Нажмите Enter, чтобы начать: "
 }
 
 # Message at the end
@@ -76,11 +76,11 @@ function message_at_the_end {
     echo
     echo "IP: $show_ip"
     echo
-    echo "Script: $script_name"
+    echo "Скрипт: $script_name"
     echo
-    echo "Log: $logfile_path"
+    echo "Лог: $logfile_path"
     echo
-    echo "Parameters are written to a file: $pg_conf_tune"
+    echo "Параметры записаны в файл: $pg_conf_tune"
     echo
     echo "PostgreSQL:"
     echo
