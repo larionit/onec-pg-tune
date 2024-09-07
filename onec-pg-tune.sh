@@ -8,13 +8,13 @@ pg_ver=16
 # PostgreSQL directory
 pg_dir=/var/lib/pgpro/1c-$pg_ver/data
 
-# Location of the main .conf file
+# Location of the main ".conf" file
 pg_conf_main=$pg_dir/postgresql.conf
 
 # Directory for our conf. files
 pg_conf_dir=$pg_dir/conf.d
 
-# Path to the .conf file to which we will write our parameters
+# Path to the ".conf" file to which we will write our parameters
 pg_conf_tune=$pg_conf_dir/00-onec-tune.conf
 
 ### ======== Settings ======== ###
@@ -30,7 +30,7 @@ function elevate {
     fi
 }
 
-# Function for logging (when called, it outputs a message to the console containing date, time and the text passed in the first argument)
+# Logs a message with timestamp and description to the console.
 function log {
     echo
     echo "$(date '+%Y-%m-%d %H:%M:%S') -> $1"
@@ -42,6 +42,13 @@ function find_and_comment {
     target=$1
     pattern_to_match=$2
     sed -e "/${pattern_to_match}/ s/^#*/#/" -i $target
+}
+
+# Function for searching and deleting a string
+function find_and_remove {
+    target=$1
+    pattern_to_match=$2
+    sed -i "/${pattern_to_match}/d" $target 
 }
 
 # Function performing arithmetic operations
@@ -135,14 +142,19 @@ message_before_start
 
 ### -------- Creating files and directories -------- ###
 
-# Create a directory for our .conf files
-mkdir -p $pg_conf_dir
+# Message to log
+log "Creating files and directories"
+
+# Create a directory for our ".conf" files if it is not already created
+if [[ ! -d $pg_conf_dir ]]
+    mkdir -p $pg_conf_dir
+fi
 
 # Create temporary files in /tmp
 temp_pg_conf_main=$(mktemp)
 temp_pg_conf_tune=$(mktemp)
 
-# Create a temporary copy of the main .conf file
+# Create a temporary copy of the main ".conf" file
 cp $pg_conf_main $temp_pg_conf_main
 
 ### -------- Creating files and directories -------- ###
@@ -229,7 +241,12 @@ do
     echo "$line" >> $temp_pg_conf_tune
 done
 
-# Add the path to the conf.d directory to the main configuration file
+# Remove the path to the conf.d directory from the main configuration file.
+# This is necessary to prevent duplicates from appearing in subsequent runs of this script. 
+find_and_remove $temp_pg_conf_main "# Include configuration files from directory"
+find_and_remove $temp_pg_conf_main "include_dir = '$pg_conf_dir'"
+
+# Add the path to the "conf.d" directory to the main configuration file
 echo >> $temp_pg_conf_main
 echo "# Include configuration files from directory" >> $temp_pg_conf_main
 echo "include_dir = '$pg_conf_dir'" >> $temp_pg_conf_main
@@ -241,18 +258,28 @@ echo "include_dir = '$pg_conf_dir'" >> $temp_pg_conf_main
 # Message to log
 log "Applying changes"
 
-# Back up the main .conf file
+# Back up the main config file
 time=$(date +%G_%m_%d_%H_%M_%S)
 cp $pg_conf_main $pg_conf_main.bk.$time
 
 # Stop the service
 systemctl stop postgrespro-1c-$pg_ver
 
-# Write changes from temporary files to master files
+# Remove current main config file
 rm $pg_conf_main
-rm $pg_conf_tune
+
+# Remove the "tuned" configuration file if it exists
+if [[ ! -f "$pg_conf_tune" ]]
+    rm $pg_conf_tune
+fi
+
+# Write changes from temporary files to master files
 cp $temp_pg_conf_main $pg_conf_main
 cp $temp_pg_conf_tune $pg_conf_tune
+
+# Delete temporary files
+rm $temp_pg_conf_main
+rm $temp_pg_conf_tune
 
 # Fixing permissions
 chown postgres:postgres $pg_conf_main
@@ -261,10 +288,6 @@ chmod 700 $pg_conf_dir
 
 # Start the service
 systemctl start postgrespro-1c-$pg_ver
-
-# Delete temporary files
-rm $temp_pg_conf_main
-rm $temp_pg_conf_tune
 
 ### -------- Applying changes -------- ###
 
