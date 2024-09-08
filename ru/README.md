@@ -1,4 +1,4 @@
-[RU] | [EN]
+[EN] | [RU]
 
 [EN]: https://github.com/larionit/onec-pg-tune/blob/dev/README.md
 [RU]: https://github.com/larionit/onec-pg-tune/blob/dev/ru/README.md
