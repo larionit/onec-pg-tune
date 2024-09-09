@@ -1,7 +1,7 @@
 [EN] | [RU]
 
-[EN]: https://github.com/larionit/onec-pg-tune/blob/dev/README.md
-[RU]: https://github.com/larionit/onec-pg-tune/blob/dev/ru/README.md
+[EN]: https://github.com/larionit/onec-pg-tune/blob/main/README.md
+[RU]: https://github.com/larionit/onec-pg-tune/blob/main/ru/README.md
 
 # onec-pg-tune.sh
 
@@ -12,5 +12,5 @@
 Ubuntu:
 
 ``` bash
-bash <(curl -fsSL https://raw.githubusercontent.com/larionit/onec-pg-tune/dev/ru/setup.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/larionit/onec-pg-tune/main/ru/setup.sh)
 ```

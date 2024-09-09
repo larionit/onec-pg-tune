@@ -1,7 +1,7 @@
 [RU] | [EN]
 
-[EN]: https://github.com/larionit/onec-pg-tune/blob/dev/README.md
-[RU]: https://github.com/larionit/onec-pg-tune/blob/dev/ru/README.md
+[EN]: https://github.com/larionit/onec-pg-tune/blob/main/README.md
+[RU]: https://github.com/larionit/onec-pg-tune/blob/main/ru/README.md
 
 # onec-pg-tune.sh
 
@@ -12,5 +12,5 @@ Script customizing PostgreSQL parameters to improve performance of "1C:Enterpris
 Ubuntu:
 
 ``` bash
-bash <(curl -fsSL https://raw.githubusercontent.com/larionit/onec-pg-tune/dev/setup.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/larionit/onec-pg-tune/main/setup.sh)
 ```

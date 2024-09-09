@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Link to installable script
-target_script_url=https://raw.githubusercontent.com/larionit/onec-pg-tune/dev/onec-pg-tune.sh
+target_script_url=https://raw.githubusercontent.com/larionit/onec-pg-tune/main/onec-pg-tune.sh
 
 # Link to this installation script (needed in case of privilege escalation via sudo)
-setup_script_url=https://raw.githubusercontent.com/larionit/onec-pg-tune/dev/setup.sh
+setup_script_url=https://raw.githubusercontent.com/larionit/onec-pg-tune/main/setup.sh
 
 # Temporary file for this installation script (needed in case of sudo privilege escalation)
 temp_setup_script=$(mktemp)
