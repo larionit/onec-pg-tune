@@ -5,7 +5,11 @@
 
 # onec-pg-tune.sh
 
-Script customizing PostgreSQL parameters to improve performance of "1C:Enterprise 8" server.
+<img align="left" width="70" height="70" src="https://github.com/user-attachments/assets/9acf0dec-da31-4095-81d6-0286ee9bddc8">
+
+Script customizing PostgreSQL parameters to improve performance of 1C:Enterprise 8.
+
+Based on the recommendations from 1C described in [this article](https://its.1c.com/db/metod8dev/content/5866/hdoc).
 
 ## Quick start
 
