@@ -9,7 +9,7 @@
 
 Script customizing PostgreSQL parameters to improve performance of 1C:Enterprise 8.
 
-Based on the recommendations from 1C described in [this article](https://its.1c.com/db/metod8dev/content/5866/hdoc).
+Based on the recommendations from «1С» described in [this article](https://its.1c.com/db/metod8dev/content/5866/hdoc).
 
 ## Quick start
 
